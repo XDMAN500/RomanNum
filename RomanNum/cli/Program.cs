@@ -30,21 +30,7 @@ namespace RomanNumProjectCLI
                     if (vals.Length == 2)
                     {
                         string read = vals[1];
-                        int value;
-
-                        if (!int.TryParse(read, out value))
-                        {
-                            Console.WriteLine("Could not read the number.");
-                            Console.ReadKey();
-                            continue;
-                        }
-
-
-                        string romans = RomanConverter.toRoman(value);
-
-                        int convValue = RomanConverter.ToDecimal(romans);
-                        Console.WriteLine("Roman Numeral: " + romans);
-                        Console.WriteLine("Decimal Value: " + convValue);
+                        
                     }
                     else
                     {
@@ -58,27 +44,12 @@ namespace RomanNumProjectCLI
                     {
 
                         string roman = vals[1];
-
-                        try
-                        {
-                            int convValue = RomanConverter.ToDecimal(roman);
-                            string romans = RomanConverter.toRoman(convValue);
-                            Console.WriteLine("Roman Numeral: " + romans);
-                            Console.WriteLine("Decimal Value: " + convValue);
-                        }
-                        catch (System.ArgumentException ex)
-                        {
-
-                            Console.WriteLine("Unrecognized character in the sequence");
-                        }
+                        toDecimal(roman)
+                      
                     }
                     else
                     {
                         Console.WriteLine("Not enough arguments: todecimal <roman>");
-
-
-
-                        Console.ReadKey();
                     }
                 }
                 else if (vals[0].Equals("countdown"))
@@ -102,10 +73,6 @@ namespace RomanNumProjectCLI
                     else
                     {
                         Console.WriteLine("Not enough arguments: countdown <number>");
-
-
-
-                        Console.ReadKey();
                     }
                 }
                 else if (vals[0].Equals("help"))
@@ -122,8 +89,43 @@ namespace RomanNumProjectCLI
                 }
             }
         }
-               
 
+
+        static void toRoman(string read)
+        {
+            int value;
+
+            if (!int.TryParse(read, out value))
+            {
+                Console.WriteLine("Could not read the number.");
+                Console.ReadKey();
+                return;
+            }
+
+
+            string romans = RomanConverter.toRoman(value);
+
+            int convValue = RomanConverter.ToDecimal(romans);
+            Console.WriteLine("Roman Numeral: " + romans);
+            Console.WriteLine("Decimal Value: " + convValue);
+        }
+
+        static void toDecimal(string roman)
+        {
+            try
+            {
+                int convValue = RomanConverter.ToDecimal(roman);
+                string romans = RomanConverter.toRoman(convValue);
+                Console.WriteLine("Roman Numeral: " + romans);
+                Console.WriteLine("Decimal Value: " + convValue);
+            }
+            catch (System.ArgumentException ex)
+            {
+
+                Console.WriteLine("Unrecognized character in the sequence");
+            }
+
+        }
 
         static void standard() {
 
